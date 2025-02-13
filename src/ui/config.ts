@@ -1,5 +1,5 @@
 import { createPublicClient, http } from 'viem'
-import {abstractTestnet, polygonAmoy } from 'viem/chains'
+import { polygonAmoy } from 'viem/chains'
 import { createWalletClient, custom } from 'viem'
 
 export const publicClient = createPublicClient({ 
