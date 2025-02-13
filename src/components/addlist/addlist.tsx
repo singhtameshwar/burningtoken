@@ -3,7 +3,7 @@ import { useState } from "react";
 import { publicClient } from "@/ui/config";
 import abi from "@/abi/abi.json";
 
-const CONTRACT_ADDRESS = "0x5DAb9D1D8990B169D04BcF8dd30cC8CdD9b820D8";
+const CONTRACT_ADDRESS = "0x15bc1322d2C39b7c27351E077e6E31Fd9E3a9941";
 
 export const ADDLISTITEMS = () => {
 
@@ -12,7 +12,7 @@ export const ADDLISTITEMS = () => {
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const fetchAllowlist01 = async () => {
-        
+
         setIsLoading(true);
         setError(null);
         try {

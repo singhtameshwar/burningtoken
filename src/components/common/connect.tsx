@@ -25,11 +25,11 @@ const config = getDefaultConfig({
 
 const queryClient = new QueryClient();
 
-// Separate Connect Button component
+
 export function CustomConnectButton() {
   return <ConnectButton />;
 }
-// Provider wrapper
+
 export default function WalletProvider({
   children,
 }: {

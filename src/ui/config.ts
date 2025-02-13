@@ -7,7 +7,6 @@ export const publicClient = createPublicClient({
   transport: http()
 })
 
-
 export const walletClient = createWalletClient({
   chain: polygonAmoy,
   transport: custom(window.ethereum)
