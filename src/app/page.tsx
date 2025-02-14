@@ -29,9 +29,8 @@ export const useContractRead = () => {
         account: "0x1C87B29DAcEae35025E814DD78E385EF2f8918A8"
       });
       setMaxSupply(result as string);
-    } catch (err: any) {
-      console.error("Contract call error:", err);
-      setError(err.message || "Failed to fetch max supply");
+    } catch {
+      setError("Failed to fetch max supply");
     } finally {
       setIsLoading(false);
     }
@@ -48,9 +47,8 @@ export const useContractRead = () => {
         account: "0x1C87B29DAcEae35025E814DD78E385EF2f8918A8"
       });
       setData(result as bigint);
-    } catch (err: any) {
-      console.error("Contract call error:", err);
-      setError(err.message || "Failed to fetch active phase");
+    } catch {
+      setError("Failed to fetch active phase");
     } finally {
       setIsLoading(false);
     }

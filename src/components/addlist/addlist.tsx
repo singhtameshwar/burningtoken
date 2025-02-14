@@ -24,9 +24,8 @@ export const ADDLISTITEMS = () => {
             });
 
             setAllowlist01(result as string[]);
-        } catch (err: any) {
-            console.error("Contract call error:", err);
-            setError(err.message || "Failed to fetch Allowlist01");
+        } catch {
+            setError("Failed to fetch Allowlist01");
         } finally {
             setIsLoading(false);
         }
@@ -44,9 +43,8 @@ export const ADDLISTITEMS = () => {
             });
 
             setAllowlist02(result as string[]);
-        } catch (err: any) {
-            console.error("Contract call error:", err);
-            setError(err.message || "Failed to fetch Allowlist02");
+        } catch  {
+            setError("Failed to fetch Allowlist02");
         } finally {
             setIsLoading(false);
         }

@@ -43,7 +43,7 @@ export const Ownerabilities = () => {
       
       const contractAddress = "0x15bc1322d2C39b7c27351E077e6E31Fd9E3a9941";
       return new Contract(contractAddress, NFT_ABI, signer);
-    } catch (error) {
+    } catch {
       throw new Error("Failed to connect to contract: " + message);
     }
   };
@@ -58,7 +58,7 @@ export const Ownerabilities = () => {
       );
       await tx.wait();
       setSuccess('Pricing updated successfully!');
-    } catch (err) {
+    } catch {
       setError(message);
     } finally {
       setIsLoading(false);
@@ -76,7 +76,7 @@ export const Ownerabilities = () => {
       );
       await tx.wait();
       setSuccess('Phases updated successfully!');
-    } catch (err) {
+    } catch {
       setError(message);
     } finally {
       setIsLoading(false);
@@ -93,8 +93,8 @@ export const Ownerabilities = () => {
       );
       await tx.wait();
       setSuccess('Royalty info updated successfully!');
-    } catch (err: any) {
-      setError(err.message);
+    } catch {
+      setError(message);
     } finally {
       setIsLoading(false);
     }
@@ -107,8 +107,8 @@ export const Ownerabilities = () => {
       const tx = await contract.setBurnClaimContract(burnClaimAddress);
       await tx.wait();
       setSuccess('Burn claim contract updated successfully!');
-    } catch (err: any) {
-      setError(err.message);
+    } catch {
+      setError(message);
     } finally {
       setIsLoading(false);
     }
@@ -121,8 +121,8 @@ export const Ownerabilities = () => {
       const tx = await contract.setBaseURI(baseURI);
       await tx.wait();
       setSuccess('Base URI updated successfully!');
-    } catch (err: any) {
-      setError(err.message);
+    } catch {
+      setError(message);
     } finally {
       setIsLoading(false);
     }
@@ -138,15 +138,14 @@ export const Ownerabilities = () => {
   
       console.log("Transaction successful. Addresses added.");  
       setSuccess('Addresses added to allowlist successfully!');
-    } catch (err: any) {
-      setError(err.message);
-      console.error("Error adding addresses:", err.message); 
+    } catch  {
+      setError(message);
+      console.error("Error adding addresses:",message); 
     } finally {
       setIsLoading(false);
     }
   };
   
-
   return (
     <div className="container mx-auto p-4 space-y-6">
       <h1 className="text-2xl font-bold mb-6 flex items-center gap-2">

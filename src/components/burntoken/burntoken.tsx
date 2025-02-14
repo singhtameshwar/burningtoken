@@ -11,8 +11,6 @@ export const BURNTOKEN = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [burnedAmount, setBurnedAmount] = useState<string | null>(null);
-
-
   const connectToContract = async () => {
     try {
       const provider = new ethers.BrowserProvider(window.ethereum);
@@ -20,7 +18,7 @@ export const BURNTOKEN = () => {
       
       const contractAddress = "0x15bc1322d2C39b7c27351E077e6E31Fd9E3a9941";
       return new Contract(contractAddress, NFT_ABI, signer);
-    } catch (error) {
+    } catch{
       throw new Error("Failed to connect to contract");
     }
   };
@@ -35,8 +33,8 @@ export const BURNTOKEN = () => {
         if (tokensToBurn) {
             setTokensToBurn(burnedAmount as string);
         }
-      } catch (err: any) {
-        setError(err.message || "Failed to burn tokens");
+      } catch {
+        setError("Failed to burn tokens");
       } finally {
         setIsLoading(false);
       }

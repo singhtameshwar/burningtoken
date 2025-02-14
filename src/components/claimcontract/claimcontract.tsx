@@ -19,7 +19,7 @@ export const BURNCLAIMCONTRACT = () => {
 
             const contractAddress = "0x15bc1322d2C39b7c27351E077e6E31Fd9E3a9941";
             return new Contract(contractAddress, NFT_ABI, signer);
-        } catch (error) {
+        } catch{
             throw new Error("Failed to connect to contract");
         }
     };
@@ -34,8 +34,8 @@ export const BURNCLAIMCONTRACT = () => {
             await tx.wait();
             setAddedContracts([...addedContracts, claimAddress]);
             setClaimAddress("");
-        } catch (err: any) {
-            setError(err.message || "Failed to add contract address");
+        } catch {
+            setError("Failed to add contract address");
         } finally {
             setIsLoading(false);
         }

@@ -8,7 +8,6 @@ import {
 } from '@rainbow-me/rainbowkit';
 import { WagmiProvider } from 'wagmi';
 import {
-  abstractTestnet,
   polygonAmoy,
 } from 'wagmi/chains';
 import {

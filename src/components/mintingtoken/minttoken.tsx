@@ -9,8 +9,6 @@ import { ethers } from "ethers";
 export const MintingToken = () => {
   const [mintAmount, setMintAmount] = useState("");
   const [mintPhase, setMintPhase] = useState("");
-  console.log(mintPhase,"hello duke");
-  const [data, setData] = useState<bigint | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -23,7 +21,7 @@ export const MintingToken = () => {
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
       return new Contract(contractAddress, ABI_ADDRESS, signer);
-    } catch (error) {
+    } catch {
       throw new Error("Failed to connect to contract");
     }
   };
@@ -40,9 +38,8 @@ export const MintingToken = () => {
         account: "0x1C87B29DAcEae35025E814DD78E385EF2f8918A8"
       });
       setMintPhase(result  as string );
-    } catch (err: any) {
-      console.error("Contract call error:", err);
-      setError(err.message || "Failed to fetch active phase");
+    } catch {
+      setError("Failed to fetch active phase");
     } finally {
       setIsLoading(false);
     }
@@ -80,12 +77,10 @@ export const MintingToken = () => {
         setError("Invalid mint phase");
         return;
       }
-
       await tx.wait();
       console.log("Minting successful!");
-    } catch (err: any) {
-      console.error("Contract call error:", err);
-      setError(err.message || "Minting failed");
+    } catch {
+      setError("Minting failed");
     } finally {
       setIsLoading(false);
     }
