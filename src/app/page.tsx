@@ -1,15 +1,15 @@
-import {BURNTOKEN }from "@/components/burntoken/burntoken";
+import {BURNTOKEN} from "@/components/burntoken/burntoken";
 import { MintingToken } from "@/components/mintingtoken/minttoken";
 import { PhaseDisplay } from "@/components/mintphase/phase";
 import { BURNCLAIMCONTRACT } from "@/components/claimcontract/claimcontract";
-export const Home = () => {
+
+export default function Home() {
   return (
-      <>  
-        <PhaseDisplay/>
-         <MintingToken />
-         <BURNCLAIMCONTRACT/>
-         <BURNTOKEN/>
-      </>
-      )}
-      export default Home;
-    
+    <>  
+      <PhaseDisplay/>
+      <MintingToken />
+      <BURNCLAIMCONTRACT/>
+      <BURNTOKEN/>
+    </>
+  );
+}

@@ -195,7 +195,6 @@ export const Ownerabilities = () => {
           </CardContent>
         </Card>
 
-        {/* Phase Settings */}
         <Card>
           <CardHeader>
             <CardTitle>Set Mint Phases</CardTitle>
