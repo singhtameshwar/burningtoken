@@ -1,3 +1,4 @@
+"use client";
 import { useState,useEffect } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
@@ -25,7 +26,6 @@ export const MintingToken = () => {
       throw new Error("Failed to connect to contract");
     }
   };
-  console.log(connectToContract,"heycontract");
 
   const fetchActivePhase = async () => {
     setIsLoading(true);
@@ -87,7 +87,7 @@ export const MintingToken = () => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="flex mt-5 flex-col items-center gap-4">
       <Input
         type="number"
         placeholder="Enter Mint Amount"
