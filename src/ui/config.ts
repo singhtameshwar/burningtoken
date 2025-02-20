@@ -1,16 +1,20 @@
 import { createPublicClient, http } from 'viem'
-import { polygonAmoy } from 'viem/chains'
+import { abstractTestnet } from 'viem/chains'
 import { createWalletClient, custom } from 'viem'
 
 export const publicClient = createPublicClient({ 
-  chain:polygonAmoy,
+  chain:abstractTestnet,
   transport: http()
 })
 
-export const walletClient = createWalletClient({
-  chain: polygonAmoy,
-  transport: custom(window.ethereum)
-})
+export const walletClient =
+  typeof window !== "undefined" && window.ethereum
+    ? createWalletClient({
+        chain: abstractTestnet,
+        transport: custom(window.ethereum),
+      })
+    : null;
+
 
 
 

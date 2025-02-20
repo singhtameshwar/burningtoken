@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Contract } from "zksync-ethers";
 import { ethers } from "ethers";
 import  NFT_ABI  from "@/abi/abi.json";
+console.log(NFT_ABI,"hey")
 import { Flame } from "lucide-react";
 
 export const BURNTOKEN = () => {
@@ -11,17 +12,19 @@ export const BURNTOKEN = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [burnedAmount, setBurnedAmount] = useState<string | null>(null);
+
   const connectToContract = async () => {
     try {
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
-      
-      const contractAddress = "0x15bc1322d2C39b7c27351E077e6E31Fd9E3a9941";
+      const contractAddress = "0xc346fb9484FbD4de1086b958e1C18b1623784896";
       return new Contract(contractAddress, NFT_ABI, signer);
     } catch{
       throw new Error("Failed to connect to contract");
-    }
+   }
   };
+
+  console.log(connectToContract,"hey cont");
 
   const handleBurn = async () => {
     try {

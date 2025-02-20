@@ -8,7 +8,8 @@ import {
 } from '@rainbow-me/rainbowkit';
 import { WagmiProvider } from 'wagmi';
 import {
-  polygonAmoy,
+  abstractTestnet,
+  
 } from 'wagmi/chains';
 import {
   QueryClientProvider,
@@ -18,7 +19,7 @@ import {
 const config = getDefaultConfig({
   appName: 'RainbowKit App',
   projectId: 'YOUR_PROJECT_ID', // Replace with your actual project ID from WalletConnect
-  chains: [ polygonAmoy],
+  chains: [  abstractTestnet],
   ssr: true,
 });
 
