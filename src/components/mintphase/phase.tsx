@@ -7,7 +7,7 @@ import { CircleIcon, RefreshCw } from "lucide-react";
 
 
 
-const CONTRACT_ADDRESS = "0xb6F76f38eff7c9fe26659cCd87D63A09802dAA82";
+const CONTRACT_ADDRESS = "0xc2404bCc3E43424c3b194c48eF061c0BCa99Fe4F";
 export const useContractRead = () => {
   const [data, setData] = useState<bigint | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -23,7 +23,7 @@ export const useContractRead = () => {
         address: CONTRACT_ADDRESS,
         abi: abi,
         functionName: "MAX_SUPPLY",
-        account: "0x1C87B29DAcEae35025E814DD78E385EF2f8918A8"
+        account: "0x52465e7f3d46EB69Dc5D9533B3F14465094fD632"
       });
       setMaxSupply(result as string);
     } catch {
@@ -41,7 +41,7 @@ export const useContractRead = () => {
         address: CONTRACT_ADDRESS,
         abi: abi,
         functionName: "getActivePhase",
-        account: "0x1C87B29DAcEae35025E814DD78E385EF2f8918A8"
+        account: "0x52465e7f3d46EB69Dc5D9533B3F14465094fD632"
       });
       setData(result as bigint);
     } catch {

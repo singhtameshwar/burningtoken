@@ -16,7 +16,7 @@ export const MintingToken = () => {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const contractAddress = "0xb6F76f38eff7c9fe26659cCd87D63A09802dAA82";
+  const contractAddress = "0xc2404bCc3E43424c3b194c48eF061c0BCa99Fe4F";
   const ABI_ADDRESS = ABI;
 
   const connectToContract = async () => {
