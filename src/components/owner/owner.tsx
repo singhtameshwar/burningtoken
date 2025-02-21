@@ -40,7 +40,7 @@ export const Ownerabilities = () => {
     try {
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
-      const contractAddress = "0xc346fb9484FbD4de1086b958e1C18b1623784896";
+      const contractAddress = "0xb6F76f38eff7c9fe26659cCd87D63A09802dAA82";
       return new Contract(contractAddress, NFT_ABI, signer);
     } catch {
       throw new Error("Failed to connect to contract: " + message);
