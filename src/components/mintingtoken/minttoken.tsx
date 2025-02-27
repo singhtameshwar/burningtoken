@@ -14,11 +14,11 @@ export const MintingToken = () => {
   const [mintAmount, setMintAmount] = useState("");
   const [mintPhase, setMintPhase] = useState("");
   const [error, setError] = useState<string | null>(null);
+
   const [isLoading, setIsLoading] = useState(false);
 
-  const contractAddress = "0xc2404bCc3E43424c3b194c48eF061c0BCa99Fe4F";
+  const contractAddress ="0x6FC79A5c63f08689075900354C97AA4D5577565e";
   const ABI_ADDRESS = ABI;
-
   const connectToContract = async () => {
     try {
       const provider = new ethers.BrowserProvider(window.ethereum);
@@ -37,7 +37,7 @@ export const MintingToken = () => {
         address: contractAddress,
         abi: ABI_ADDRESS,
         functionName: "getActivePhase",
-        account: "0x1C87B29DAcEae35025E814DD78E385EF2f8918A8"
+        account: "0x10b9bcB7E6C07CA5F1547Bb82968e6A670e78210"
       });
       setMintPhase(result as string);
     } catch {
@@ -45,6 +45,7 @@ export const MintingToken = () => {
     } finally {
       setIsLoading(false);
     }
+
   };
 
   useEffect(() => {
@@ -72,23 +73,29 @@ export const MintingToken = () => {
         setError("Invalid mint amount");
         return;
       }
-
       const contract = await connectToContract();
+      console.log(contract,"hey cont");
       
       const currentPhase = mintPhase;
+      console.log(currentPhase,"hey phase");
       
       let tx;
       if (currentPhase === "publicMintActive") {
-        tx = await contract.publicMint(mintAmount, { value: ethers.parseEther("0.01") });
+        tx = await contract.publicMint(mintAmount);
+        console.log(tx,"hey public ")
       } else if (currentPhase === "allowlist01Active") {
         tx = await contract.allowlist01Mint(mintAmount);
+        console.log(tx,"aloow");
       } else if (currentPhase === "allowlist02Active") {
         tx = await contract.allowlist02Mint(mintAmount);
+        console.log(tx,"hey allowlist2 ");
       } else {
         setError("Invalid mint phase");
         return;
       }
+      
       await tx.wait();
+      console.log(tx,"hey tx");
       setError(null);
     } catch {
       setError("Minting failed");
