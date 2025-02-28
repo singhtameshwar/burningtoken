@@ -16,7 +16,7 @@ export const BURNCLAIMCONTRACT = () => {
         try {
             const provider = new ethers.BrowserProvider(window.ethereum);
             const signer = await provider.getSigner();
-            const contractAddress = "0x6FC79A5c63f08689075900354C97AA4D5577565e";
+            const contractAddress = "0x7C5AFE2283E1bcB4d8B859D23b11bBc3DcA02aA5";
             return new Contract(contractAddress, NFT_ABI, signer);
         } catch{
             throw new Error("Failed to connect to contract");

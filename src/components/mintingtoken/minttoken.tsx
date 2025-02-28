@@ -17,7 +17,7 @@ export const MintingToken = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const contractAddress ="0x6FC79A5c63f08689075900354C97AA4D5577565e";
+  const contractAddress ="0x7C5AFE2283E1bcB4d8B859D23b11bBc3DcA02aA5";
   const ABI_ADDRESS = ABI;
   const connectToContract = async () => {
     try {
@@ -37,7 +37,7 @@ export const MintingToken = () => {
         address: contractAddress,
         abi: ABI_ADDRESS,
         functionName: "getActivePhase",
-        account: "0x10b9bcB7E6C07CA5F1547Bb82968e6A670e78210"
+        account: "0x308991965ABb8B148Acb1ce0cd8f8AAFc4c19f88"
       });
       setMintPhase(result as string);
     } catch {
