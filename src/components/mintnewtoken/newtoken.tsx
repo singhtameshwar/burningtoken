@@ -10,15 +10,15 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Loader2 } from "lucide-react";
 
-export const MintingToken = () => {
+export const NewToken = () => {
   const [mintAmount, setMintAmount] = useState("");
   const [mintPhase, setMintPhase] = useState("");
   const [error, setError] = useState<string | null>(null);
-
   const [isLoading, setIsLoading] = useState(false);
 
-  const contractAddress ="0x96068052d9ddDfFa2622d932071cbD85ef517A84";
+  const contractAddress = "0x96068052d9ddDfFa2622d932071cbD85ef517A84";
   const ABI_ADDRESS = ABI;
+
   const connectToContract = async () => {
     try {
       const provider = new ethers.BrowserProvider(window.ethereum);
@@ -45,25 +45,11 @@ export const MintingToken = () => {
     } finally {
       setIsLoading(false);
     }
-
   };
 
   useEffect(() => {
     fetchActivePhase();
   }, []);
-
-  const getPhaseDisplay = (phase: string) => {
-    switch (phase) {
-      case "publicMintActive":
-        return "Public Mint";
-      case "allowlist01Active":
-        return "Allowlist 1";
-      case "allowlist02Active":
-        return "Allowlist 2";
-      default:
-        return "Unknown Phase";
-    }
-  };
 
   const Mintingtoken = async () => {
     setIsLoading(true);
@@ -74,30 +60,25 @@ export const MintingToken = () => {
         return;
       }
       const contract = await connectToContract();
-      console.log(contract,"hey cont");
       
       const currentPhase = mintPhase;
-      console.log(currentPhase,"hey phase");
       
       let tx;
-      if (currentPhase === "publicMintActive") {
-        tx = await contract.publicMint(mintAmount);
-        console.log(tx,"hey public ")
-      } else if (currentPhase === "allowlist01Active") {
-        tx = await contract.allowlist01Mint(mintAmount);
-        console.log(tx,"aloow");
-      } else if (currentPhase === "allowlist02Active") {
-        tx = await contract.allowlist02Mint(mintAmount);
-        console.log(tx,"hey allowlist2 ");
+      if (
+        currentPhase === "publicMintActive" || 
+        currentPhase === "allowlist01Active" || 
+        currentPhase === "allowlist02Active"
+      ) {
+        tx = await contract.mintAfterBurn(mintAmount);
       } else {
         setError("Invalid mint phase");
         return;
       }
       
       await tx.wait();
-      console.log(tx,"hey tx");
       setError(null);
-    } catch {
+    } catch (err) {
+      console.error(err);
       setError("Minting failed");
     } finally {
       setIsLoading(false);
@@ -105,40 +86,33 @@ export const MintingToken = () => {
   };
 
   return (
-    <Card className="w-full mt-5 max-w-md mx-auto">
+    <Card className="w-full max-w-md mx-auto">
       <CardHeader>
-        <CardTitle className="text-2xl font-bold">Token Minting</CardTitle>
+        <CardTitle>Mint After Burn</CardTitle>
         <CardDescription>
-          Current Phase: {getPhaseDisplay(mintPhase)}
+          Current Active Phase: {mintPhase || 'Loading...'}
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="space-y-2">
-          <label htmlFor="mintAmount" className="text-sm font-medium text-gray-700">
-            Mint Amount
-          </label>
-          <Input
-            id="mintAmount"
-            type="number"
-            placeholder="Enter amount to mint"
-            value={mintAmount}
-            onChange={(e) => setMintAmount(e.target.value)}
-            className="w-full"
-            min="1"
-            disabled={isLoading}
-          />
-        </div>
-        
         {error && (
           <Alert variant="destructive">
             <AlertDescription>{error}</AlertDescription>
           </Alert>
         )}
+        <div className="space-y-2">
+          <Input 
+            type="number" 
+            placeholder="Enter mint amount" 
+            value={mintAmount}
+            onChange={(e) => setMintAmount(e.target.value)}
+            disabled={isLoading}
+          />
+        </div>
       </CardContent>
       <CardFooter>
         <Button 
           onClick={Mintingtoken} 
-          disabled={isLoading} 
+          disabled={isLoading || !mintAmount}
           className="w-full"
         >
           {isLoading ? (
@@ -147,12 +121,12 @@ export const MintingToken = () => {
               Minting...
             </>
           ) : (
-            "Mint Tokens"
+            "Mint After Burn"
           )}
         </Button>
       </CardFooter>
     </Card>
   );
-};
+}
 
-export default MintingToken;
+export default NewToken;

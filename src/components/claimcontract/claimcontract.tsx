@@ -10,13 +10,14 @@ export const BURNCLAIMCONTRACT = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [claimAddress, setClaimAddress] = useState("");
+    console.log(claimAddress,"hey claim")
     const [addedContracts, setAddedContracts] = useState<string[]>([]);
 
     const connectToContract = async () => {
         try {
             const provider = new ethers.BrowserProvider(window.ethereum);
             const signer = await provider.getSigner();
-            const contractAddress = "0x7C5AFE2283E1bcB4d8B859D23b11bBc3DcA02aA5";
+            const contractAddress = "0x96068052d9ddDfFa2622d932071cbD85ef517A84";
             return new Contract(contractAddress, NFT_ABI, signer);
         } catch{
             throw new Error("Failed to connect to contract");
@@ -29,8 +30,10 @@ export const BURNCLAIMCONTRACT = () => {
         try {
             setIsLoading(true);
             const contract = await connectToContract();
+            console.log(contract,"hey cont psy");
             const tx = await contract.setBurnClaimContract(claimAddress);
             await tx.wait();
+            console.log(tx,"hey tx psy");
             setAddedContracts([...addedContracts, claimAddress]);
             setClaimAddress("");
         } catch {

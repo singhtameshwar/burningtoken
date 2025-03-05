@@ -40,7 +40,7 @@ export const Ownerabilities = () => {
     try {
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
-      const contractAddress = "0x7C5AFE2283E1bcB4d8B859D23b11bBc3DcA02aA5";
+      const contractAddress = "0x96068052d9ddDfFa2622d932071cbD85ef517A84";
       return new Contract(contractAddress, NFT_ABI, signer);
     } catch {
       throw new Error("Failed to connect to contract: " + message);
@@ -268,19 +268,6 @@ export const Ownerabilities = () => {
             <CardTitle>Other Settings</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <Input
-              placeholder="Burn Claim Contract Address"
-              value={burnClaimAddress}
-              onChange={(e) => setBurnClaimAddress(e.target.value)}
-            />
-            <Button 
-              onClick={handleSetBurnClaim}
-              disabled={isLoading}
-              className="w-full mb-4"
-            >
-              Set Burn Claim Contract
-            </Button>
-
             <Input
               placeholder="Base URI"
               value={baseURI}
