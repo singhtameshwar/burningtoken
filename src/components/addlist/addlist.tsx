@@ -3,7 +3,7 @@ import { useState } from "react";
 import { publicClient } from "@/ui/config";
 import abi from "@/abi/abi.json";
 
-const CONTRACT_ADDRESS = "0x96068052d9ddDfFa2622d932071cbD85ef517A84";
+const CONTRACT_ADDRESS = "0x653602c6df13E375B418e84e4A9A6BE54d53C06c";
 export const ADDLISTITEMS = () => {
     const [allowlist01, setAllowlist01] = useState<string[] | null>(null);
     const [allowlist02, setAllowlist02] = useState<string[] | null>(null);

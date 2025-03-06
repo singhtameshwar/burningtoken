@@ -16,7 +16,7 @@ export const Ownerabilities = () => {
 
   const [prices, setPrices] = useState({
     publicMintPrice: '',
-    allowlist01Price: ''
+    allowlist01Price: '',
   });
   
   const [phases, setPhases] = useState({
@@ -30,7 +30,6 @@ export const Ownerabilities = () => {
     fee: ''
   });
 
-  const [burnClaimAddress, setBurnClaimAddress] = useState('');
   const [baseURI, setBaseURI] = useState('');
   const [allowlistAddresses, setAllowlistAddresses] = useState('');
   const [selectedAllowlist, setSelectedAllowlist] = useState('1'); 
@@ -40,7 +39,7 @@ export const Ownerabilities = () => {
     try {
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
-      const contractAddress = "0x96068052d9ddDfFa2622d932071cbD85ef517A84";
+      const contractAddress = "0x653602c6df13E375B418e84e4A9A6BE54d53C06c";
       return new Contract(contractAddress, NFT_ABI, signer);
     } catch {
       throw new Error("Failed to connect to contract: " + message);
@@ -92,20 +91,6 @@ export const Ownerabilities = () => {
       );
       await tx.wait();
       setSuccess('Royalty info updated successfully!');
-    } catch {
-      setError(message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleSetBurnClaim = async () => {
-    try {
-      setIsLoading(true);
-      const contract = await connectToContract();
-      const tx = await contract.setBurnClaimContract(burnClaimAddress);
-      await tx.wait();
-      setSuccess('Burn claim contract updated successfully!');
     } catch {
       setError(message);
     } finally {
