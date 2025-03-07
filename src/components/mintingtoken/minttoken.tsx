@@ -16,7 +16,7 @@ export const MintingToken = () => {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const contractAddress = "0x653602c6df13E375B418e84e4A9A6BE54d53C06c";
+  const contractAddress = "0x2a8c82a999E4aa7e0CDe8cC51Ef92959e90Cf502";
   const ABI_ADDRESS = ABI;
   const accountAddress = "0x52465e7f3d46EB69Dc5D9533B3F14465094fD632";
 
@@ -92,7 +92,7 @@ export const MintingToken = () => {
       }
 
       const functionExists = ABI_ADDRESS.some(
-        (item: any) => item.type === "function" && item.name === functionName
+        (item) => item.type === "function" && item.name === functionName
       );
 
       if (!functionExists) {
@@ -120,9 +120,9 @@ export const MintingToken = () => {
 
       console.log(`Price for ${currentPhase}:`, price.toString());
       setCurrentPrice(price);
-    } catch (err: any) {
+    } catch (err) {
       console.error("Price fetch error:", err);
-      setError(`Failed to fetch price: ${err.message || "Unknown error"}`);
+      setError("Failed to fetch price");
     }
   };
 
@@ -159,9 +159,9 @@ export const MintingToken = () => {
       await tx.wait();
       console.log("Transaction complete");
       setError(null);
-    } catch (err: any) {
+    } catch (err) {
       console.error("Minting error:", err);
-      setError(`Minting failed: ${err.message || "Unknown error"}`);
+      setError("Minting failed");
     } finally {
       setIsLoading(false);
     }
