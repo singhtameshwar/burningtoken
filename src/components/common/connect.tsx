@@ -25,7 +25,6 @@ const config = getDefaultConfig({
 
 const queryClient = new QueryClient();
 
-
 export function CustomConnectButton() {
   return <ConnectButton />;
 }
