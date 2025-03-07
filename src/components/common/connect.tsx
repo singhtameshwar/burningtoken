@@ -29,7 +29,7 @@ export function CustomConnectButton() {
   return <ConnectButton />;
 }
 
-export default function WalletProvider({
+export default function WalletProvider({ 
   children,
 }: {
   children: React.ReactNode;

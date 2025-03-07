@@ -16,7 +16,7 @@ export const MintingToken = () => {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const contractAddress = "0x2a8c82a999E4aa7e0CDe8cC51Ef92959e90Cf502";
+  const contractAddress = "0xe4717d092D8438AFD6F8ea8c58ab2c2453574B95";
   const ABI_ADDRESS = ABI;
   const accountAddress = "0x52465e7f3d46EB69Dc5D9533B3F14465094fD632";
 
@@ -74,9 +74,6 @@ export const MintingToken = () => {
 
     setError(null);
     try {
-      console.log("Fetching mint prices for phase:", currentPhase);
-
-      // Map phase names to their corresponding function names
       const phaseFunctionMap: { [key: string]: string } = {
         publicMintActive: "getPublicMintPrice",
         allowlist01Active: "getAllowlist01Price",
@@ -86,7 +83,6 @@ export const MintingToken = () => {
       const functionName = phaseFunctionMap[currentPhase];
 
       if (!functionName) {
-        console.error("Unknown phase:", currentPhase);
         setError(`Unknown mint phase: ${currentPhase}`);
         return;
       }
@@ -101,8 +97,6 @@ export const MintingToken = () => {
         return;
       }
 
-      console.log(`Calling contract function: ${functionName}`);
-
       const price = await publicClient.readContract({
         address: contractAddress,
         abi: ABI_ADDRESS,
@@ -110,14 +104,11 @@ export const MintingToken = () => {
         account: accountAddress
       });
 
-      console.log(`Raw price result:`, price);
-
       if (typeof price !== "bigint") {
         console.error(`Invalid price data type: ${typeof price}`, price);
         setError("Invalid price format returned from contract");
         return;
       }
-
       console.log(`Price for ${currentPhase}:`, price.toString());
       setCurrentPrice(price);
     } catch (err) {
@@ -126,7 +117,6 @@ export const MintingToken = () => {
     }
   };
 
-  // Updated useEffect to react to mintPhase changes
   useEffect(() => {
     if (mintPhase) {
       console.log("Phase changed to:", mintPhase, "- fetching price");
@@ -141,7 +131,6 @@ export const MintingToken = () => {
     try {
       const contract = await connectToContract();
       if (!mintPhase) throw new Error("Mint phase not set");
-  
       const totalPrice = currentPrice; // Ensure this is in wei
   
       let tx;
@@ -161,7 +150,7 @@ export const MintingToken = () => {
       setError(null);
     } catch (err) {
       console.error("Minting error:", err);
-      setError("Minting failed");
+      setError(`Minting failed: ${err instanceof Error ? err.message : String(err)}`);
     } finally {
       setIsLoading(false);
     }

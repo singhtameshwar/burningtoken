@@ -17,6 +17,7 @@ export const Ownerabilities = () => {
   const [prices, setPrices] = useState({
     publicMintPrice: '',
     allowlist01Price: '',
+    allowlist02Price: ''
   });
   
   const [phases, setPhases] = useState({
@@ -39,7 +40,7 @@ export const Ownerabilities = () => {
     try {
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
-      const contractAddress = "0x2a8c82a999E4aa7e0CDe8cC51Ef92959e90Cf502";
+      const contractAddress = "0xe4717d092D8438AFD6F8ea8c58ab2c2453574B95";
       return new Contract(contractAddress, NFT_ABI, signer);
     } catch {
       throw new Error("Failed to connect to contract: " + message);
@@ -52,7 +53,8 @@ export const Ownerabilities = () => {
       const contract = await connectToContract();
       const tx = await contract.setPricing(
         ethers.parseEther(prices.publicMintPrice),
-        ethers.parseEther(prices.allowlist01Price)
+        ethers.parseEther(prices.allowlist01Price),
+        ethers.parseEther(prices.allowlist02Price)
       );
       await tx.wait();
       setSuccess('Pricing updated successfully!');
@@ -168,6 +170,12 @@ export const Ownerabilities = () => {
               placeholder="Allowlist 01 Price (ETH)"
               value={prices.allowlist01Price}
               onChange={(e) => setPrices(prev => ({...prev, allowlist01Price: e.target.value}))}
+            />
+            <Input
+              type="number"
+              placeholder="Allowlist 02 Price (ETH)"
+              value={prices.allowlist02Price}
+              onChange={(e) => setPrices(prev => ({...prev, allowlist02Price: e.target.value}))}
             />
             <Button 
               onClick={handleSetPricing}

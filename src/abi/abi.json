@@ -371,7 +371,7 @@
 		"inputs": [],
 		"name": "allowlist02Mint",
 		"outputs": [],
-		"stateMutability": "nonpayable",
+		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
@@ -383,6 +383,19 @@
 			}
 		],
 		"name": "allowlist02MintCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "allowlist02Price",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -503,6 +516,19 @@
 				"internalType": "address[]",
 				"name": "",
 				"type": "address[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getAllowlist02Price",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -870,6 +896,11 @@
 			{
 				"internalType": "uint256",
 				"name": "_al01Price",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_al02Price",
 				"type": "uint256"
 			}
 		],

@@ -16,7 +16,7 @@ export const NewToken = () => {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const contractAddress = "0x2a8c82a999E4aa7e0CDe8cC51Ef92959e90Cf502";
+  const contractAddress = "0xe4717d092D8438AFD6F8ea8c58ab2c2453574B95";
   const ABI_ADDRESS = ABI;
 
   const connectToContract = async () => {
