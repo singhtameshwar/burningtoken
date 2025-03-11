@@ -16,7 +16,7 @@ export const BURNTOKEN = () => {
     try {
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
-      const contractAddress = "0x875e2E4CC77df4cE79e8233F9C940FE0888448C4";
+      const contractAddress = "0x8592C285ca1c0253dF86B29fbf87E76d780c0445";
       return new Contract(contractAddress, NFT_ABI, signer);
     } catch{
       throw new Error("Failed to connect to contract");

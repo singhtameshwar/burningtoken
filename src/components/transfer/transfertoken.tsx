@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Contract, ethers } from "ethers";
 
-const CONTRACT_ADDRESS = "0x875e2E4CC77df4cE79e8233F9C940FE0888448C4";
+const CONTRACT_ADDRESS = "0x8592C285ca1c0253dF86B29fbf87E76d780c0445";
 
 export const TokenTransfer = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -19,6 +19,7 @@ export const TokenTransfer = () => {
     to: '',
     tokenId: ''
   });
+  console.log(transferDetails, "Transfer Details");
 
   const connectToContract = async () => {
     try {
@@ -42,12 +43,13 @@ export const TokenTransfer = () => {
       setSuccess('');
       
       const contract = await connectToContract();
+      console.log("Contract:", contract);
       const tx = await contract.transferFrom(
         transferDetails.from,
         transferDetails.to,
         transferDetails.tokenId
       );
-      
+      console.log("Transaction:", tx);
       await tx.wait();
       
       setSuccess(`Successfully transferred token #${transferDetails.tokenId} from ${transferDetails.from} to ${transferDetails.to}`);
