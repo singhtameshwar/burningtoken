@@ -18,7 +18,7 @@ import {
 
 const config = getDefaultConfig({
   appName: 'RainbowKit App',
-  projectId: 'YOUR_PROJECT_ID', // Replace with your actual project ID from WalletConnect
+  projectId: 'YOUR_PROJECT_ID',
   chains: [  abstractTestnet],
   ssr: true,
 });

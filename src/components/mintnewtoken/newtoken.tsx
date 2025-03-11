@@ -16,9 +16,8 @@ export const NewToken = () => {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const contractAddress = "0xe4717d092D8438AFD6F8ea8c58ab2c2453574B95";
+  const contractAddress = "0xca844Bbf86120260dd5359BD54B5D79193Cd61AC";
   const ABI_ADDRESS = ABI;
-
   const connectToContract = async () => {
     try {
       const provider = new ethers.BrowserProvider(window.ethereum);
@@ -121,7 +120,7 @@ export const NewToken = () => {
               Minting...
             </>
           ) : (
-            "Mint After Burn"
+            "Mint new tokens"
           )}
         </Button>
       </CardFooter>

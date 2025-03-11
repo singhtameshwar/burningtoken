@@ -34,13 +34,14 @@ export const Ownerabilities = () => {
   const [baseURI, setBaseURI] = useState('');
   const [allowlistAddresses, setAllowlistAddresses] = useState('');
   const [selectedAllowlist, setSelectedAllowlist] = useState('1'); 
+  const [transferLocked, setTransferLocked] = useState(false);
   const message="error here";
 
   const connectToContract = async () => {
     try {
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
-      const contractAddress = "0xe4717d092D8438AFD6F8ea8c58ab2c2453574B95";
+      const contractAddress = "0xca844Bbf86120260dd5359BD54B5D79193Cd61AC";
       return new Contract(contractAddress, NFT_ABI, signer);
     } catch {
       throw new Error("Failed to connect to contract: " + message);
@@ -57,6 +58,7 @@ export const Ownerabilities = () => {
         ethers.parseEther(prices.allowlist02Price)
       );
       await tx.wait();
+      console.log(tx,"tx");
       setSuccess('Pricing updated successfully!');
     } catch {
       setError(message);
@@ -64,6 +66,7 @@ export const Ownerabilities = () => {
       setIsLoading(false);
     }
   };
+
 
   const handleSetPhases = async () => {
     try {
@@ -127,6 +130,20 @@ export const Ownerabilities = () => {
     } catch  {
       setError(message);
       console.error("Error adding addresses:",message); 
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  
+  const handleSetTransferLocked = async () => {
+    try {
+      setIsLoading(true);
+      const contract = await connectToContract();
+      const tx = await contract.setTransfersLocked(transferLocked);
+      await tx.wait();
+      setSuccess('Transfer locked status updated successfully!');
+    } catch {
+      setError(message);
     } finally {
       setIsLoading(false);
     }
@@ -251,6 +268,43 @@ export const Ownerabilities = () => {
               className="w-full"
             >
               Update Royalty
+            </Button>
+          </CardContent>
+        </Card>
+
+        {/* Transfer Lock Settings */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Transfer Lock Settings</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex flex-col space-y-4">
+              <p className="text-sm text-gray-500">
+                When enabled, NFT transfers will be restricted
+              </p>
+              <div className="flex justify-between">
+                <Button 
+                  variant={transferLocked ? "default" : "outline"}
+                  onClick={() => setTransferLocked(true)}
+                  className="w-[48%]"
+                >
+                  Locked
+                </Button>
+                <Button 
+                  variant={!transferLocked ? "default" : "outline"}
+                  onClick={() => setTransferLocked(false)}
+                  className="w-[48%]"
+                >
+                  Unlocked
+                </Button>
+              </div>
+            </div>
+            <Button 
+              onClick={handleSetTransferLocked}
+              disabled={isLoading}
+              className="w-full mt-4"
+            >
+              Update Transfer Lock
             </Button>
           </CardContent>
         </Card>

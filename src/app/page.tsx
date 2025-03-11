@@ -3,6 +3,7 @@ import { MintingToken } from "@/components/mintingtoken/minttoken";
 import { PhaseDisplay } from "@/components/mintphase/phase";
 import { BURNCLAIMCONTRACT } from "@/components/claimcontract/claimcontract";
 import { NewToken } from "@/components/mintnewtoken/newtoken";
+import  {TokenTransfer} from "@/components/transfer/transfertoken";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <BURNCLAIMCONTRACT/>
       <BURNTOKEN/>
       <NewToken/>
+      <TokenTransfer/>
     </>
   );
 }

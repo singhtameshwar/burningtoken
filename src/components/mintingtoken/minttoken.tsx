@@ -16,7 +16,7 @@ export const MintingToken = () => {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const contractAddress = "0xe4717d092D8438AFD6F8ea8c58ab2c2453574B95";
+  const contractAddress = "0xca844Bbf86120260dd5359BD54B5D79193Cd61AC";
   const ABI_ADDRESS = ABI;
   const accountAddress = "0x52465e7f3d46EB69Dc5D9533B3F14465094fD632";
 
@@ -75,9 +75,9 @@ export const MintingToken = () => {
     setError(null);
     try {
       const phaseFunctionMap: { [key: string]: string } = {
-        publicMintActive: "getPublicMintPrice",
-        allowlist01Active: "getAllowlist01Price",
-        allowlist02Active: "getAllowlist02Price"
+        publicMintActive: "publicMintPrice",
+        allowlist01Active: "allowlist01Price",
+        allowlist02Active: "allowlist02Price"
       };
 
       const functionName = phaseFunctionMap[currentPhase];

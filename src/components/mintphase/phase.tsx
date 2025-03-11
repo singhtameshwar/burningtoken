@@ -7,7 +7,7 @@ import { CircleIcon, RefreshCw } from "lucide-react";
 
 
 
-const CONTRACT_ADDRESS = "0xe4717d092D8438AFD6F8ea8c58ab2c2453574B95";
+const CONTRACT_ADDRESS = "0xca844Bbf86120260dd5359BD54B5D79193Cd61AC";
 export const useContractRead = () => {
   const [data, setData] = useState<bigint | null>(null);
   const [error, setError] = useState<string | null>(null);
