@@ -117,23 +117,6 @@ export const Ownerabilities = () => {
     }
   };
 
-  const handleAddToAllowlist = async () => {
-    try {
-      setIsLoading(true);
-      const contract = await connectToContract();
-      const addresses = allowlistAddresses.split(',').map(addr => addr.trim());  
-      const tx = await contract[selectedAllowlist === '1' ? 'addToAllowlist01' : 'addToAllowlist02'](addresses);
-      await tx.wait();
-  
-      console.log("Transaction successful. Addresses added.");  
-      setSuccess('Addresses added to allowlist successfully!');
-    } catch  {
-      setError(message);
-      console.error("Error adding addresses:",message); 
-    } finally {
-      setIsLoading(false);
-    }
-  };
   
   const handleSetTransferLocked = async () => {
     try {
@@ -144,6 +127,31 @@ export const Ownerabilities = () => {
       setSuccess('Transfer locked status updated successfully!');
     } catch {
       setError(message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleAddToAllowlist = async () => {
+    try {
+      setIsLoading(true);
+      const contract = await connectToContract();
+      const addresses = allowlistAddresses.split(',').map(addr => addr.trim());
+      console.log(addresses, "addresses");
+      let tx;
+      if (selectedAllowlist === '1') {
+        tx = await contract.updateAllowlist(addresses, 1);
+      } else {
+        tx = await contract.updateAllowlist(addresses, 2);
+      }
+      
+      console.log(tx, "tx");
+      await tx.wait();
+      console.log("Transaction successful. Addresses added.");  
+      setSuccess('Addresses added to allowlist successfully!');
+    } catch (err) {
+      console.error("Error adding addresses:", err);
+      setError("Failed to add addresses to allowlist: ");
     } finally {
       setIsLoading(false);
     }
@@ -330,7 +338,6 @@ export const Ownerabilities = () => {
           </CardContent>
         </Card>
 
-        {/* Allowlist Management */}
         <Card className="md:col-span-2">
           <CardHeader>
             <CardTitle>Manage Allowlist</CardTitle>

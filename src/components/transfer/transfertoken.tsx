@@ -42,8 +42,6 @@ export const TokenTransfer = () => {
       setSuccess('');
       
       const contract = await connectToContract();
-      
-      // Call the transferFrom function on the contract
       const tx = await contract.transferFrom(
         transferDetails.from,
         transferDetails.to,
@@ -53,8 +51,6 @@ export const TokenTransfer = () => {
       await tx.wait();
       
       setSuccess(`Successfully transferred token #${transferDetails.tokenId} from ${transferDetails.from} to ${transferDetails.to}`);
-      
-      // Reset form after successful transfer
       setTransferDetails({
         from: '',
         to: '',
