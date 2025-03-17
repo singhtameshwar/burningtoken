@@ -4,6 +4,7 @@ import { PhaseDisplay } from "@/components/mintphase/phase";
 import { BURNCLAIMCONTRACT } from "@/components/claimcontract/claimcontract";
 import { NewToken } from "@/components/mintnewtoken/newtoken";
 import  {TokenTransfer} from "@/components/transfer/transfertoken";
+import { NFTDISPLAY } from "@/components/display/nftdisplay";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <BURNTOKEN/>
       <NewToken/>
       <TokenTransfer/>
+      <NFTDISPLAY/>
     </>
   );
 }

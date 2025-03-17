@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Contract, ethers } from "ethers";
 
-const CONTRACT_ADDRESS = "0x8592C285ca1c0253dF86B29fbf87E76d780c0445";
+const CONTRACT_ADDRESS = "0xe408C8dcfDfEaaF4A2a373bA6C6b828113733d90";
 
 export const TokenTransfer = () => {
   const [isLoading, setIsLoading] = useState(false);
