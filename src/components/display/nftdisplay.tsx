@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import ABI from "@/abi/abi.json";
+import Image from "next/image";
 import { Contract } from "ethers";
 import { ethers } from "ethers";
 
@@ -63,9 +64,9 @@ export const NFTDISPLAY = () => {
       window.ethereum.on('accountsChanged', handleAccountsChanged);
   
       return currentAccount;
-    } catch (err: any) {
-      console.error("MetaMask connection error:", err);
-      setError(err.message || "Failed to connect to MetaMask");
+    } catch{
+      console.error("MetaMask connection error:",);
+      setError("Failed to connect to MetaMask");
       setIsConnected(false);
       return null;
     }
@@ -129,7 +130,7 @@ export const NFTDISPLAY = () => {
       try {
         const totalSupply = await contract.totalSupply();
         maxTokenToCheck = totalSupply.toString();
-      } catch (err) {
+      } catch {
         maxTokenToCheck = "1000"; 
       }
       for (let i = parseInt(maxTokenToCheck); i > 0; i--) {
@@ -142,7 +143,7 @@ export const NFTDISPLAY = () => {
             foundToken = true;
             break;
           }
-        } catch (err) {
+        } catch {
           continue;
         }
       }
@@ -257,10 +258,12 @@ export const NFTDISPLAY = () => {
       <div className="mt-6 overflow-hidden bg-white rounded-lg shadow-lg">
         {imageUrl && (
           <div className="relative w-full h-64 overflow-hidden bg-gray-100">
-            <img 
+            <Image 
               src={imageUrl} 
               alt={nftData.name || "NFT Image"} 
               className="object-contain w-full h-full"
+              height={250}
+              width={250}
             />
           </div>
         )}
