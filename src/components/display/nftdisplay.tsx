@@ -23,7 +23,7 @@ export const NFTDISPLAY = () => {
   const [latestTokenId, setLatestTokenId] = useState<string>("0");
   const [accountAddress, setAccountAddress] = useState<string>("");
   const [isConnected, setIsConnected] = useState<boolean>(false);
-  const contractAddress = "0xe408C8dcfDfEaaF4A2a373bA6C6b828113733d90";
+  const contractAddress = "0x0892b05DefB2e44e2417F18b8dA7c0B1379EF913";
   const ABI_ADDRESS = ABI;
 
   const connectToMetaMask = async () => {
