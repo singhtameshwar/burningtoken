@@ -13,7 +13,7 @@ interface NFTMetadata {
     trait_type: string;
     value: string | number;
   }>;
-  [key: string]: any;
+  // [key: string]: any;
 }
 
 export const NFTDISPLAY = () => {
@@ -153,7 +153,7 @@ export const NFTDISPLAY = () => {
       }
       
       return latestId;
-    } catch (err: any) {
+    } catch (err) {
       console.error("Error finding latest token:", err);
       throw err;
     }
@@ -195,9 +195,9 @@ export const NFTDISPLAY = () => {
       }
       
       setNftData(metadata);
-    } catch (err: any) {
+    } catch (err) {
       console.error("Error fetching NFT data:", err);
-      setError(err.message || "Failed to fetch NFT data");
+      setError("Failed to fetch NFT data");
     } finally {
       setIsLoading(false);
     }
@@ -218,9 +218,9 @@ export const NFTDISPLAY = () => {
       const latestId = await getLatestMintedToken(walletAddress);
       setLatestTokenId(latestId);
       await fetchNFTData(latestId, walletAddress);
-    } catch (err: any) {
+    } catch (err) {
       console.error("Error fetching latest token:", err);
-      setError(err.message || "Failed to fetch latest token");
+      setError("Failed to fetch latest token");
       setIsLoading(false);
     }
   };
